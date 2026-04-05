@@ -1,0 +1,18 @@
+<odoo>
+    <menuitem id="pawsafe_menu_root" name="PawSafe">
+
+        <menuitem id="pawsafe_menu_operations" name="Operations">
+            <menuitem id="pawsafe_menu_animals" action="pawsafe_animal_action"/>
+            <menuitem id="pawsafe_menu_rescue_cases" action="pawsafe_rescue_case_action"/>
+            <menuitem id="pawsafe_menu_vet_records" action="pawsafe_vet_record_action"/>
+            <menuitem id="pawsafe_menu_foster" action="pawsafe_foster_action"/>
+            <menuitem id="pawsafe_menu_adoptions" action="pawsafe_adoption_action"/>
+        </menuitem>
+
+        <menuitem id="pawsafe_menu_settings" name="Settings">
+            <menuitem id="pawsafe_menu_shelters" action="pawsafe_shelter_action"/>
+            <menuitem id="pawsafe_menu_rescuers" action="pawsafe_rescuer_action"/>
+        </menuitem>
+
+    </menuitem>
+</odoo>

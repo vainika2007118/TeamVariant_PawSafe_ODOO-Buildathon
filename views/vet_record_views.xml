@@ -1,0 +1,55 @@
+<odoo>
+    <record id="pawsafe_vet_record_action" model="ir.actions.act_window">
+        <field name="name">Vet Records</field>
+        <field name="res_model">pawsafe.vet.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="pawsafe_vet_record_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.vet.record.tree</field>
+        <field name="model">pawsafe.vet.record</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="severity == 'critical'" decoration-warning="severity == 'moderate'">
+                <field name="animal_id"/>
+                <field name="vet_name"/>
+                <field name="visit_date"/>
+                <field name="diagnosis"/>
+                <field name="severity"/>
+                <field name="cost"/>
+                <field name="follow_up_date"/>
+                <field name="is_vaccinated"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_vet_record_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.vet.record.form</field>
+        <field name="model">pawsafe.vet.record</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="animal_id"/>
+                            <field name="vet_name"/>
+                            <field name="visit_date"/>
+                            <field name="severity"/>
+                            <field name="cost"/>
+                            <field name="follow_up_date"/>
+                        </group>
+                        <group>
+                            <field name="is_vaccinated"/>
+                            <field name="vaccine_name" invisible="not is_vaccinated"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="diagnosis"/>
+                        <field name="treatment"/>
+                        <field name="medicines"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

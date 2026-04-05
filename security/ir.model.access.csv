@@ -1,0 +1,9 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_pawsafe_animal,access_pawsafe_animal,model_pawsafe_animal,base.group_user,1,1,1,1
+access_pawsafe_shelter,access_pawsafe_shelter,model_pawsafe_shelter,base.group_user,1,1,1,1
+access_pawsafe_rescuer,access_pawsafe_rescuer,model_pawsafe_rescuer,base.group_user,1,1,1,1
+access_pawsafe_rescue_case,access_pawsafe_rescue_case,model_pawsafe_rescue_case,base.group_user,1,1,1,1
+access_pawsafe_vet_record,access_pawsafe_vet_record,model_pawsafe_vet_record,base.group_user,1,1,1,1
+access_pawsafe_foster,access_pawsafe_foster,model_pawsafe_foster,base.group_user,1,1,1,1
+access_pawsafe_adoption,access_pawsafe_adoption,model_pawsafe_adoption,base.group_user,1,1,1,1
+access_pawsafe_sponsor,access_pawsafe_sponsor,model_pawsafe_sponsor,base.group_user,1,1,1,1

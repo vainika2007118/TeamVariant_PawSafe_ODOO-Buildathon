@@ -1,0 +1,76 @@
+<odoo>
+    <record id="pawsafe_rescuer_action" model="ir.actions.act_window">
+        <field name="name">Rescuers</field>
+        <field name="res_model">pawsafe.rescuer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="pawsafe_rescuer_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.rescuer.tree</field>
+        <field name="model">pawsafe.rescuer</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="is_active == False">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="city"/>
+                <field name="area_coverage"/>
+                <field name="total_rescues"/>
+                <field name="total_fosters"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_rescuer_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.rescuer.form</field>
+        <field name="model">pawsafe.rescuer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="city"/>
+                            <field name="area_coverage"/>
+                            <field name="joined_date"/>
+                            <field name="is_active"/>
+                        </group>
+                        <group>
+                            <field name="has_vehicle"/>
+                            <field name="is_trained"/>
+                            <field name="can_foster"/>
+                            <field name="total_rescues"/>
+                            <field name="total_fosters"/>
+                        </group>
+                    </group>
+                    <field name="notes"/>
+                    <notebook>
+                        <page string="Rescue Cases">
+                            <field name="rescue_case_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="animal_id"/>
+                                    <field name="location"/>
+                                    <field name="priority"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Foster Cases">
+                            <field name="foster_ids">
+                                <tree>
+                                    <field name="animal_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

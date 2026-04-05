@@ -1,0 +1,77 @@
+<odoo>
+    <record id="pawsafe_rescue_case_action" model="ir.actions.act_window">
+        <field name="name">Rescue Cases</field>
+        <field name="res_model">pawsafe.rescue.case</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="pawsafe_rescue_case_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.rescue.case.tree</field>
+        <field name="model">pawsafe.rescue.case</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="priority == 'critical'" decoration-warning="priority == 'high'" decoration-success="state == 'completed'">
+                <field name="name"/>
+                <field name="animal_id"/>
+                <field name="rescuer_id"/>
+                <field name="location"/>
+                <field name="priority"/>
+                <field name="state"/>
+                <field name="reported_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_rescue_case_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.rescue.case.form</field>
+        <field name="model">pawsafe.rescue.case</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_assign" type="object" string="Assign Rescuer" invisible="state != 'reported'"/>
+                        <button name="action_start" type="object" string="Start Rescue" invisible="state != 'assigned'"/>
+                        <button name="action_complete" type="object" string="Complete" invisible="state != 'in_progress'"/>
+                        <button name="action_cancel" type="object" string="Cancel" invisible="state in ('completed', 'cancelled')"/>
+                        <field name="state" widget="statusbar" statusbar_visible="reported,assigned,in_progress,completed"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="animal_id"/>
+                            <field name="rescuer_id"/>
+                            <field name="shelter_id"/>
+                            <field name="priority"/>
+                        </group>
+                        <group>
+                            <field name="reported_by"/>
+                            <field name="reporter_phone"/>
+                            <field name="location"/>
+                            <field name="reported_date"/>
+                            <field name="completed_date"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                    <field name="notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pawsafe_rescue_case_view_kanban" model="ir.ui.view">
+        <field name="name">pawsafe.rescue.case.kanban</field>
+        <field name="model">pawsafe.rescue.case</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <templates>
+                    <t t-name="card">
+                        <field name="name"/>
+                        <field name="animal_id"/>
+                        <field name="location"/>
+                        <field name="priority"/>
+                        <field name="rescuer_id"/>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,46 @@
+<odoo>
+    <record id="pawsafe_foster_action" model="ir.actions.act_window">
+        <field name="name">Foster Care</field>
+        <field name="res_model">pawsafe.foster</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="pawsafe_foster_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.foster.tree</field>
+        <field name="model">pawsafe.foster</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'completed'" decoration-muted="state == 'cancelled'">
+                <field name="animal_id"/>
+                <field name="rescuer_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="duration"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_foster_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.foster.form</field>
+        <field name="model">pawsafe.foster</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_complete" type="object" string="Complete Foster" invisible="state != 'active'"/>
+                        <button name="action_cancel" type="object" string="Cancel" invisible="state in ('completed', 'cancelled')"/>
+                        <field name="state" widget="statusbar" statusbar_visible="active,completed"/>
+                    </header>
+                    <group>
+                        <field name="animal_id"/>
+                        <field name="rescuer_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="duration"/>
+                    </group>
+                    <field name="notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

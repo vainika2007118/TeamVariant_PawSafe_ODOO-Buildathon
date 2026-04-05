@@ -1,0 +1,63 @@
+<odoo>
+    <record id="pawsafe_shelter_action" model="ir.actions.act_window">
+        <field name="name">Shelters</field>
+        <field name="res_model">pawsafe.shelter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="pawsafe_shelter_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.shelter.tree</field>
+        <field name="model">pawsafe.shelter</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="is_full == True">
+                <field name="name"/>
+                <field name="city"/>
+                <field name="capacity"/>
+                <field name="current_occupancy"/>
+                <field name="available_space"/>
+                <field name="occupancy_rate"/>
+                <field name="is_full"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_shelter_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.shelter.form</field>
+        <field name="model">pawsafe.shelter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="city"/>
+                            <field name="state_location"/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="current_occupancy"/>
+                            <field name="available_space"/>
+                            <field name="occupancy_rate"/>
+                            <field name="is_full"/>
+                        </group>
+                    </group>
+                    <field name="address"/>
+                    <notebook>
+                        <page string="Animals">
+                            <field name="animal_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="species"/>
+                                    <field name="state"/>
+                                    <field name="medical_severity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,83 @@
+<odoo>
+    <record id="pawsafe_adoption_action" model="ir.actions.act_window">
+        <field name="name">Adoptions</field>
+        <field name="res_model">pawsafe.adoption</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="pawsafe_adoption_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.adoption.tree</field>
+        <field name="model">pawsafe.adoption</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'completed'" decoration-danger="state == 'returned'" decoration-muted="state == 'rejected'">
+                <field name="animal_id"/>
+                <field name="adopter_name"/>
+                <field name="adopter_phone"/>
+                <field name="adoption_date"/>
+                <field name="state"/>
+                <field name="is_blacklisted"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_adoption_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.adoption.form</field>
+        <field name="model">pawsafe.adoption</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_screen" type="object" string="Start Screening" invisible="state != 'applied'"/>
+                        <button name="action_approve" type="object" string="Approve" invisible="state != 'screening'"/>
+                        <button name="action_complete" type="object" string="Complete Adoption" invisible="state != 'approved'"/>
+                        <button name="action_reject" type="object" string="Reject" invisible="state in ('completed', 'rejected', 'returned')"/>
+                        <button name="action_return" type="object" string="Mark Returned" invisible="state != 'completed'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="applied,screening,approved,completed"/>
+                    </header>
+                    <group>
+                        <group string="Animal Info">
+                            <field name="animal_id"/>
+                            <field name="adoption_date"/>
+                            <field name="is_blacklisted"/>
+                        </group>
+                        <group string="Adoption Status">
+                            <field name="home_type"/>
+                            <field name="has_other_pets"/>
+                            <field name="has_children"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Adopter Details">
+                            <group>
+                                <group string="Personal Info">
+                                    <field name="adopter_name"/>
+                                    <field name="adopter_phone"/>
+                                    <field name="adopter_email"/>
+                                </group>
+                                <group string="Home Info">
+                                    <field name="home_type"/>
+                                    <field name="has_other_pets"/>
+                                    <field name="has_children"/>
+                                </group>
+                            </group>
+                            <group string="Address">
+                                <field name="adopter_address" string="Full Address"/>
+                            </group>
+                        </page>
+                        <page string="Return / Rejection Notes">
+                            <group string="Rejection Details">
+                                <field name="rejection_reason" string="Rejection Reason"/>
+                            </group>
+                            <group string="Return Details">
+                                <field name="return_reason" string="Return Reason"/>
+                            </group>
+                        </page>
+                        <page string="Happy Tails">
+                            <field name="happy_tails_story" string="Their Story"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

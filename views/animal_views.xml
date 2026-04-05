@@ -1,0 +1,200 @@
+<odoo>
+    <record id="pawsafe_animal_action" model="ir.actions.act_window">
+        <field name="name">Animals</field>
+        <field name="res_model">pawsafe.animal</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="pawsafe_animal_view_tree" model="ir.ui.view">
+        <field name="name">pawsafe.animal.tree</field>
+        <field name="model">pawsafe.animal</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="medical_severity == 'critical'" decoration-warning="medical_severity == 'moderate'" decoration-success="state == 'adopted'">
+                <field name="name"/>
+                <field name="species"/>
+                <field name="breed"/>
+                <field name="gender"/>
+                <field name="shelter_id"/>
+                <field name="state"/>
+                <field name="medical_severity"/>
+                <field name="days_in_shelter"/>
+                <field name="is_vaccinated"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pawsafe_animal_view_form" model="ir.ui.view">
+        <field name="name">pawsafe.animal.form</field>
+        <field name="model">pawsafe.animal</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="photo" widget="image" class="oe_avatar" options="{'preview_image': 'photo', 'size': [128, 128]}"/>
+                    <header>
+                        <button name="action_rescue" type="object" string="Mark Rescued" invisible="state != 'stray'"/>
+                        <button name="action_start_treatment" type="object" string="Start Treatment" invisible="state != 'rescued'"/>
+                        <button name="action_mark_recovering" type="object" string="Mark Recovering" invisible="state != 'in_treatment'"/>
+                        <button name="action_make_available" type="object" string="Make Available" invisible="state != 'recovering'"/>
+                        <button name="action_mark_adopted" type="object" string="Mark Adopted" invisible="state != 'available'"/>
+                        <button name="action_mark_deceased" type="object" string="Mark Deceased" invisible="state in ('adopted', 'deceased')"/>
+                        <field name="state" widget="statusbar" statusbar_visible="stray,rescued,in_treatment,recovering,available,adopted"/>
+                    </header>
+                    <group>
+                        <group string="Basic Info">
+                            <field name="name"/>
+                            <field name="species"/>
+                            <field name="breed"/>
+                            <field name="age_years"/>
+                            <field name="age_months"/>
+                            <field name="gender"/>
+                            <field name="color"/>
+                            <field name="weight"/>
+                            <field name="microchip_id"/>
+                        </group>
+                        <group string="Location and Status">
+                            <field name="shelter_id"/>
+                            <field name="rescue_location"/>
+                            <field name="rescue_date"/>
+                            <field name="days_in_shelter"/>
+                            <field name="medical_severity"/>
+                            <field name="total_sponsorship"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rescue Cases">
+                            <field name="rescue_case_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="rescuer_id"/>
+                                    <field name="priority"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Personality" invisible="state == 'stray'">
+                            <group>
+                                <field name="temperament"/>
+                                <field name="good_with_kids"/>
+                                <field name="good_with_animals"/>
+                                <field name="trained"/>
+                            </group>
+                            <field name="special_needs"/>
+                        </page>
+                        <page string="Medical" invisible="state == 'stray'">
+                            <group>
+                                <field name="is_vaccinated"/>
+                                <field name="is_neutered"/>
+                                <field name="last_vaccination_date"/>
+                                <field name="next_vaccination_date"/>
+                                <field name="last_deworming_date"/>
+                                <field name="next_deworming_date"/>
+                                <field name="vet_visits"/>
+                            </group>
+                        </page>
+                        <page string="Vet Records" invisible="state == 'stray'">
+                            <field name="vet_record_ids">
+                                <tree>
+                                    <field name="visit_date"/>
+                                    <field name="vet_name"/>
+                                    <field name="diagnosis"/>
+                                    <field name="severity"/>
+                                    <field name="cost"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Foster History" invisible="state in ('stray', 'rescued', 'in_treatment')">
+                            <field name="foster_ids">
+                                <tree>
+                                    <field name="rescuer_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="duration"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Sponsors" invisible="state == 'stray'">
+                            <field name="sponsor_ids">
+                                <tree>
+                                    <field name="sponsor_name"/>
+                                    <field name="amount"/>
+                                    <field name="purpose"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Adoption" invisible="state != 'adopted'">
+                            <field name="adoption_ids">
+                                <tree>
+                                    <field name="adopter_name"/>
+                                    <field name="adopter_phone"/>
+                                    <field name="adoption_date"/>
+                                    <field name="state"/>
+                                    <field name="is_blacklisted"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group string="Adopter Details">
+                                            <field name="adopter_name"/>
+                                            <field name="adopter_phone"/>
+                                            <field name="adopter_email"/>
+                                            <field name="adopter_address"/>
+                                            <field name="adoption_date"/>
+                                        </group>
+                                        <group string="Home Info">
+                                            <field name="home_type"/>
+                                            <field name="has_other_pets"/>
+                                            <field name="has_children"/>
+                                            <field name="is_blacklisted"/>
+                                            <field name="state"/>
+                                        </group>
+                                    </group>
+                                    <group string="Return / Rejection Notes">
+                                        <field name="rejection_reason"/>
+                                        <field name="return_reason"/>
+                                    </group>
+                                    <group string="Happy Tails">
+                                        <field name="happy_tails_story"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Happy Tails" invisible="state != 'adopted'">
+                            <field name="adoption_story"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pawsafe_animal_view_kanban" model="ir.ui.view">
+        <field name="name">pawsafe.animal.kanban</field>
+        <field name="model">pawsafe.animal</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="name"/>
+                <field name="species"/>
+                <field name="breed"/>
+                <field name="medical_severity"/>
+                <field name="shelter_id"/>
+                <field name="days_in_shelter"/>
+                <field name="photo"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click" style="padding: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <img t-att-src="kanban_image('pawsafe.animal', 'photo', record.id.raw_value)" alt="Animal Photo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"/>
+                                <strong style="font-size: 16px;"><field name="name"/></strong>
+                            </div>
+                            <div style="margin: 4px 0;">🐾 Species: <field name="species"/></div>
+                            <div style="margin: 4px 0;">📋 Status: <field name="state"/></div>
+                            <div style="margin: 4px 0;">📅 Days in Shelter: <field name="days_in_shelter"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
