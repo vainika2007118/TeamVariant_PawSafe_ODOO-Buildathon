@@ -6,7 +6,7 @@
 Public & Institutional ERP
 
 ## About
-PawSafe is a complete ERP system built on Odoo for managing the entire lifecycle of a stray animal — from rescue to adoption.
+PawSafe is a complete ERP system built on Odoo for managing the entire lifecycle of a stray animal. From rescue to adoption.
 
 ## The Problem
 India has over 30 million stray animals. NGOs trying to help them are working with WhatsApp groups, paper registers and Excel sheets. Rescues get delayed. Medical records get lost. Bad adopters get approved again. PawSafe solves this.
@@ -14,7 +14,7 @@ India has over 30 million stray animals. NGOs trying to help them are working wi
 ## Try It Live
 
 1. Click this link: **https://actable-atticus-lovable.ngrok-free.dev**
-2. You may see a ngrok warning page — click **"Visit Site"**
+2. If you come across ngrok warning page, click **"Visit Site"**
 3. Login using:
    - Username: **admin**
    - Password: **admin**
@@ -46,5 +46,5 @@ India has over 30 million stray animals. NGOs trying to help them are working wi
 
 
 ## Branches
-- `main` — PawSafe hackathon project
-- `workshop-estate` — Workshop practice module (Real Estate ERP)
+- `main` : PawSafe buildathon project
+- `workshop-estate` : Workshop practice module (Real Estate ERP)
